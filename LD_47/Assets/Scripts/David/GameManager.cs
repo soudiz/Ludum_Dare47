@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private Camera camera;
+
     [SerializeField]
     private float gameTime = 90.0f;
     [SerializeField]
@@ -26,6 +28,7 @@ public class GameManager : MonoBehaviour
         transform.localScale = scaleMin;
         scaleMin = alarmClockPrefab.transform.localScale;
         scaleMax = scaleMin * scaleMultiplicator;
+        camera = Camera.main;
 
 
     }
@@ -37,6 +40,7 @@ public class GameManager : MonoBehaviour
         if(counter > gameTime)
         {
             // Game Over
+            camera.GetComponent<Animator>().SetTrigger("Shake");
         }
 
         StartCoroutine(LerpScale());
